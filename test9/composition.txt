@@ -1,0 +1,30 @@
+There are many different kinds of relationships two objects may have in real-life, and we use specific “relation type” words to describe these relationships.
+
+1. composition
+1.1 Object composition
+
+In real-life, complex objects are often built from smaller, simpler objects. For example, a car is built using a metal frame, an engine, some tires, a transmission, a steering wheel, and a large number of other parts. A personal computer is built from a CPU, a motherboard, some memory, etc… Even you are built from smaller parts: you have a head, a body, some legs, arms, and so on. This process of building complex objects from simpler ones is called object composition.
+
+Broadly speaking, object composition models a “has-a” relationship between two objects. A car “has-a” transmission. Your computer “has-a” CPU. You “have-a” heart. The complex object is sometimes called the whole, or the parent. The simpler object is often called the part, child, or component.
+
+In C++, you’ve already seen that structs and classes can have data members of various types (such as fundamental types or other classes). When we build classes with data members, we’re essentially constructing a complex object from simpler parts, which is object composition. For this reason, structs and classes are sometimes referred to as composite types.
+
+1.2 Types of object composition
+There are two basic subtypes of object composition: composition and aggregation.
+
+1.3 Composition
+To qualify as a composition, an object and a part must have the following relationship:
+
+The part (member) is part of the object (class)
+The part (member) can only belong to one object (class) at a time
+The part (member) has its existence managed by the object (class)
+The part (member) does not know about the existence of the object (class)
+
+Composition relationships are part-whole relationships where the part must constitute part of the whole object. For example, a heart is an part of a person’s body. The part in a composition can only be part of one object at a time. A heart that is part of one person’s body can not be part of someone else’s body at the same time.
+
+In a composition relationship, the object is responsible for the existence of the parts. Most often, this means the part is created when the object is created, and destroyed when the object is destroyed. But more broadly, it means the object manages the part’s lifetime in such a way that the user of the object does not need to get involved. For example, when a body is created, the heart is created too. When a person’s body is destroyed, their heart is destroyed too. Because of this, composition is sometimes called a “death relationship”.
+
+And finally, the part doesn’t know about the existence of the whole. Your heart operates blissfully unaware that it is part of a larger structure. We call this a unidirectional relationship, because the body knows about the heart, but not the other way around.
+
+In general, if you can design a class using composition, you should design a class using composition. Classes designed using composition are straightforward, flexible, and robust (in that they clean up after themselves nicely).
+
