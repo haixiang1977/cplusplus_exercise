@@ -1,0 +1,20 @@
+http://www.learncpp.com/cpp-tutorial/104-container-classes/
+
+a container class is a class designed to hold and organize multiple instances of another type (either another class, or a fundamental type). There are many different kinds of container classes, each of which has various advantages, disadvantages, and restrictions in their use.
+
+By far the most commonly used container in programming is the array, which you have already seen many examples of. Although C++ has built-in array functionality, programmers will often use an array container class (std::array or std::vector) instead because of the additional benefits they provides. Unlike built-in arrays, array container classes generally provide dynamic resizing (when elements are added or removed), remember their size when they are passed to functions, and do bounds-checking. This not only makes array container classes more convenient than normal arrays, but safer too.
+
+Container classes typically implement a fairly standardized minimal set of functionality. Most well-defined containers will include functions that:
+. Create an empty container (via a constructor)
+. Insert a new object into the container
+. Remove an object from the container
+. Report the number of objects currently in the container
+. Empty the container of all objects
+. Provide access to the stored objects
+. Sort the elements (optional)
+
+Sometimes certain container classes will omit some of this functionality. For example, arrays container classes often omit the insert and remove functions because they are slow and the class designer does not want to encourage their use.
+
+Unlike some other languages, C++ generally does not allow you to mix types inside a container. If you need containers to hold integers and doubles, you will generally have to write two separate containers to do this (or use templates, which is an advanced C++ feature). Despite the restrictions on their use, containers are immensely useful, and they make programming easier, safer, and faster.
+
+
