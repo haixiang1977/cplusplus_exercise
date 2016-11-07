@@ -20,13 +20,13 @@ using namespace std;
 
 int main()
 {
-	set <int> myset;
-	set <int>::const_iterator set_it; /* read only set iterator */
+    set <int> myset;
+    set <int>::const_iterator set_it; /* read only set iterator */
 
-	map <int, string> mymap;
-	map <int, string>::const_iterator map_it; /* read only map iterator */
+    map <int, string> mymap;
+    map <int, string>::const_iterator map_it; /* read only map iterator */
 
-	myset.insert(7);
+    myset.insert(7);
     myset.insert(7);
     myset.insert(2);
     myset.insert(-6);
