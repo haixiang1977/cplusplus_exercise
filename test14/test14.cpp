@@ -5,7 +5,7 @@
  *      Author: liu
  */
 
-// understanding template in c++
+// understanding template function in c++
 
 // In C++, function templates are functions that serve as a pattern for
 // creating other similar functions.
