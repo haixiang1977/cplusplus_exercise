@@ -63,17 +63,17 @@ int Configuration::parse() {
 	     std::string id, val;
 	     std::size_t found;
 
-	//std::cout << "line " << line << std::endl;
-	if (line[0] == '#') {
-	    continue;
-	}
+	    //std::cout << "line " << line << std::endl;
+	    if (line[0] == '#') {
+	        continue;
+	    }
 
-	found = line.find('=', 0);
-	if (found != std::string::npos) {
-	    //std::cout << "found '=' at " << line.find('=', 0) << std::endl;
-	    id = line.substr(0, found);
-	    val = line.substr(found + 1, std::string::npos);
-	    m_options[id] = val;
+	    found = line.find('=', 0);
+	    if (found != std::string::npos) {
+	        //std::cout << "found '=' at " << line.find('=', 0) << std::endl;
+	        id = line.substr(0, found);
+	        val = line.substr(found + 1, std::string::npos);
+	        m_options[id] = val;
 	    }
 	}
 
