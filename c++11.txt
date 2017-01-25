@@ -1,0 +1,30 @@
+C++11 is a version of the standard for the programming language C++. It was approved by International Organization for Standardization (ISO) on 12 August 2011, replacing C++03,[1] superseded by C++14 on 18 August 2014[2] and later, by C++17, which is still under development.
+
+Areas of the core language that were significantly improved include multithreading support, generic programming support, uniform initialization, and performance. Significant changes were also made to the C++ Standard Library, incorporating most of the C++ Technical Report 1 (TR1) libraries, except the library of mathematical special functions.
+
+1. uniform initialization with {}
+
+2. Lambda Expressions
+
+3. Automatic Type Deduction and decltype
+
+4. Deleted and Defaulted Functions
+
+5. nullptr
+
+6. Delegating Constructors
+
+7. Rvalue References
+
+8. C++11 Standard Library
+
+Library Technical Report 1 (TR1): TR1 included new container classes (unordered_set, unordered_map, unordered_multiset, and unordered_multimap) and several new libraries for regular expressions, tuples, function object wrapper and more. With the approval of C++11, TR1 is officially incorporated into standard C++ standard, along with new libraries that have been added since TR1.
+
+Threading Library: the most important addition to C++11 from a programmer’s perspective is concurrency. C++11 has a thread class that represents an execution thread, promises and futures, which are objects that are used for synchronization in a concurrent environment, the async() function template for launching concurrent tasks, and the thread_local storage type for declaring thread-unique data.
+
+9. New Smart Pointer Classes
+C++98 defined only one smart pointer class, auto_ptr, which is now deprecated. C++11 includes new smart pointer classes: shared_ptr and the recently-added unique_ptr.
+
+10. New C++ Algorithms
+The C++11 Standard Library defines new algorithms that mimic the set theory operations all_of(), any_of() and none_of().
+
