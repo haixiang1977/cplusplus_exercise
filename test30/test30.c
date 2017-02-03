@@ -28,11 +28,26 @@ void custom_printf(int level, const char* fmt, ...) {
 	return;
 }
 
+//#define macro_printf(level, fmt, ...) printf(fmt, __VA_ARGS__)
+#define macro_printf(level, fmt, ...) \
+	do { \
+		switch(level) { \
+		case CUSTOM_ERROR: \
+			printf("ERROR	printf	"); \
+			printf(fmt, __VA_ARGS__); \
+			break; \
+		default: \
+			break; \
+		} \
+	} while(0);
+
 int main()
 {
 	int i = 100;
 
 	custom_printf(CUSTOM_DEBUG, "int i = %d\n", i);
+
+	macro_printf(CUSTOM_ERROR, "int i = %d\n", i);
 
 	return 0;
 }
