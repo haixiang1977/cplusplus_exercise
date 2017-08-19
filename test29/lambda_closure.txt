@@ -1,0 +1,4 @@
+A lambda is just an anonymous function - a function defined with no name. In some languages, such as Scheme, they are equivalent to named functions. In fact, the function definition is re-written as binding a lambda to a variable internally.
+
+A closure is any function which closes over the environment in which it was defined. This means that it can access variables not in its parameter list.
+
