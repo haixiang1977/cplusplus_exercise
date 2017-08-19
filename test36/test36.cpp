@@ -62,6 +62,7 @@ int main() {
     
     a->stop();
     
+    a->print();
     // check whether delete B will also delete A?
     delete a;
     
