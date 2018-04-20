@@ -70,4 +70,13 @@ int main () {
 	B.sleep();
 	B.wakeup();
 	B.jump();
+
+	CAT* c = new BIGCAT;
+        c->sound();
+        c->climb();  // no override because no virtual
+        c->sleep();
+        c->wakeup(); // no override because no sleep
+        c->jump();  // no override because no sleep
+
+        delete c;
 }
