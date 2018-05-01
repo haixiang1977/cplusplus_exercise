@@ -12,11 +12,19 @@ void print_hello() {
 }
 
 int main() {
-	std::function<void()> func;
+	/* save function pointer */
+	std::function<void()> func_ptr;
 
-	func = print_hello;
+	func_ptr = print_hello;
 
-	func();
+	func_ptr();
 
+	/* lambda function */
+	std::function<void()> func_lambda = []() {
+		cout << "hello lambda std::function" << endl;
+		return;
+	};
+
+	func_lambda();
 	return 0;
 }
