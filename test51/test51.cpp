@@ -3,7 +3,8 @@
 
 #include <stdio.h>
 #include <cstdint>
-#include <chrono>
+#include <ctime>
+#include <cstring>
 
 int main() {
     uint64_t hart_value = 24 * 60 * 60 * ((uint64_t)32000) - (uint64_t)1; // 1 sec and 32 ms
@@ -27,13 +28,28 @@ int main() {
     int hour = hart_value_in_minute / 60;
     printf("extracted hour %d\n", hour);
 
-    // current utc - ms
-    std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+    // get current utc time
+    time_t tm;
+    struct tm gmt_tm;
 
-    uint64_t now_ms = std::chrono::duration_cast<std::chrono::milliseconds>( \
-                 now.time_since_epoch()).count();
+    tm = time(nullptr);
+    gmtime_r(&tm, &gmt_tm);
+    int chour = gmt_tm.tm_hour;
 
-    printf("current utc ms - %lu\n", now_ms);
-    
+    // Assume that the time passed in is from "today".
+    if ((hour != chour) && (chour == 0)) {
+        // Figure out if we went over midnight
+        tm = tm - (24 * 60 * 60);  // -1 day
+        std::memset(&gmt_tm, 0, sizeof(tm));
+        gmtime_r(&tm, &gmt_tm);
+    }
+    gmt_tm.tm_hour = hour;
+    gmt_tm.tm_min = minute;
+    gmt_tm.tm_sec = sec;
+    uint64_t utc = mktime(&gmt_tm);
+
+    printf("utc sec\t - %lu\n", utc);
+    printf("utc ms\t - %lu\n", utc * 1000 + ms);
+
     return 0;
 }
