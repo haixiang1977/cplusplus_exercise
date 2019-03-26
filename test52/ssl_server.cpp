@@ -32,7 +32,7 @@ SSL_CTX* init_server_ctx() {
     return ctx;
 }
 
-void load_certificates(SSL_CTX* ctx, char* cert, char* key) {
+void load_certificates(SSL_CTX* ctx, const char* cert, const char* key) {
     if (SSL_CTX_load_verify_locations(ctx, cert, key) != 1) {
         printf("Failed to load verify locations\n");
         exit(0);
