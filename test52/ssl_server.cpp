@@ -165,5 +165,7 @@ int main() {
     close(server);
     // free SSL context
     SSL_CTX_free(ctx);
+
+    return 0;
 }
 
