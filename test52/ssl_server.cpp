@@ -21,7 +21,7 @@ SSL_CTX* init_server_ctx() {
     SSL_METHOD *method;
 #endif
     /* create new server-method instance */
-    method = SSLv23_client_method();
+    method = SSLv23_method();
 
     ctx = SSL_CTX_new(method);
     if (ctx == NULL) {
@@ -33,14 +33,6 @@ SSL_CTX* init_server_ctx() {
 }
 
 void load_certificates(SSL_CTX* ctx, const char* cert, const char* key) {
-    if (SSL_CTX_load_verify_locations(ctx, cert, key) != 1) {
-        printf("Failed to load verify locations\n");
-        exit(0);
-    }
-    if (SSL_CTX_set_default_verify_paths(ctx) != 1) {
-        printf("Failed to set verify paths\n");
-        exit(0);
-    }
     // set the local certificate from Cert file
     if (SSL_CTX_use_certificate_file(ctx, cert, SSL_FILETYPE_PEM) <= 0) {
         printf("Failed to set certificate file\n");
@@ -54,7 +46,7 @@ void load_certificates(SSL_CTX* ctx, const char* cert, const char* key) {
     // verify private key
     if (!SSL_CTX_check_private_key(ctx)) {
         printf("Failed to match private key and cert\n");
-        exit(0);0
+        exit(0);
     }
 
     printf("LoadCertificates Compleate Successfully.....\n");
