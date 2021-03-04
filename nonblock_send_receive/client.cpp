@@ -3,6 +3,7 @@
 /* client read a line from input and send to the server */
 /* server read this line from network input and send back to the client */
 /* client read this line from network input and send back to the output */
+/* g++ -g client.cpp -o client.out */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -73,12 +74,13 @@ int main ()
             /* exceptfds = NULL */
             /* struct timeval *timeout */
             select(sockfd + 1, NULL, &write_fd, NULL, &timeout);
-            if (FD_ISSET(sockfd, write_fd))
+            if (FD_ISSET(sockfd, &write_fd))
             {
                 /* socket is writable and send data with non-block mode */
                 int ret = send(sockfd, buf + bytes_sent, total_length - bytes_sent, MSG_DONTWAIT);
                 if (ret >= 0)
                 {
+                    printf ("client bytes_sent %d\n", ret);
                     bytes_sent += ret;
                 }
                 else
@@ -89,13 +91,49 @@ int main ()
             }
         } while (bytes_sent < total_length);
     }
-    
-    printf ("client num_written %d\n", num_written);
-    while (num_read == 0) {
-        num_read = read (sockfd, buf, sizeof(buf));
+
+    /* check socket is readable */
+    {
+        struct timeval timeout; // read timeout is 1sec
+        timeout.tv_sec = 1;
+        timeout.tv_usec = 0;
+
+        memset(buf, '\0', sizeof(buf));
+
+        int bytes_received = 0;
+
+        do
+        {
+            fd_set read_fd;
+            FD_ZERO(&read_fd);
+            /* append socketfd into fdset */
+            FD_SET(sockfd, &read_fd);
+
+            /* wait for the socket to be writable */
+            /* nfds the highest-numbered file descriptor in any of the three sets, plus 1 */
+            /* here nfds = socketfd + 1 */
+            /* readfds = read_fd */
+            /* writefds = NULL */
+            /* exceptfds = NULL */
+            /* struct timeval *timeout */
+            select(sockfd + 1, &read_fd, NULL, NULL, &timeout);
+            if (FD_ISSET(sockfd, &read_fd))
+            {
+                /* socket is read and receive data with non-block mode */
+                int ret = recv(sockfd, buf, sizeof(buf), MSG_DONTWAIT);
+                if (ret >= 0)
+                {
+                    printf ("client bytes received %d\n", ret);
+                    printf ("client received %s", buf);
+                }
+                else
+                {
+                    // error and exit
+                    return -1;
+                }
+            }
+        } while (0);
     }
-    printf ("client num_read %d\n", num_read);
-    printf ("client received %s", buf);
 
     return 0;
 err:
